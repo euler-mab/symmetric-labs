@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Symmetric Labs</title>
+<meta name="description" content="A boutique advisory practice working on protocol design, AI, and the convergence of decentralised and traditional finance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fafafa;
+  --bg-soft: #f4f4f4;
+  --ink: #0a0a0a;
+  --ink-soft: #404040;
+  --ink-fade: #737373;
+  --ink-muted: #a3a3a3;
+  --rule: #e5e5e5;
+  --rule-strong: #d4d4d4;
+  --accent: #0f766e;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.55;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.mono {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-fade);
+}
+
+/* NAV */
+.nav-wrap {
+  position: sticky;
+  top: 0;
+  background: rgba(250, 250, 250, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--rule);
+  z-index: 100;
+}
+
+nav {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.wordmark-mark { width: 18px; height: 18px; flex-shrink: 0; }
+.wordmark-curve { stroke: var(--accent); }
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  font-size: 0.88rem;
+}
+
+.nav-links a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover { color: var(--accent); }
+
+/* HERO */
+.hero { padding: 80px 0 120px; position: relative; }
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.hero-meta { margin-bottom: 36px; }
+
+.hero h1 {
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.028em;
+  margin-bottom: 32px;
+  max-width: 17ch;
+}
+
+.hero-desc {
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  max-width: 46ch;
+}
+
+.chaos-panel {
+  position: relative;
+  aspect-ratio: 1;
+  width: 100%;
+  background: transparent;
+  overflow: hidden;
+}
+
+#chaos { width: 100%; height: 100%; display: block; }
+
+.chaos-caption {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+/* SECTIONS */
+section { padding: 100px 0; }
+section + section { border-top: 1px solid var(--rule); }
+
+.section-head {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 40px;
+  margin-bottom: 64px;
+}
+
+.section-head h2 {
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  font-weight: 500;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  max-width: 26ch;
+}
+
+.section-label { padding-top: 6px; }
+
+.section-body { margin-left: 200px; max-width: 760px; }
+
+/* ABOUT */
+.about-body p {
+  font-size: 1.02rem;
+  line-height: 1.62;
+  margin-bottom: 1.3em;
+  color: var(--ink-soft);
+  max-width: 62ch;
+}
+
+.about-body p:first-child {
+  color: var(--ink);
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+/* SERVICES */
+.service-row {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 40px;
+  padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+}
+
+.service-row:last-child { border-bottom: 1px solid var(--rule); }
+
+.service-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-muted);
+}
+
+.service-row h3 {
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  letter-spacing: -0.015em;
+}
+
+.service-row p {
+  font-size: 0.96rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  max-width: 58ch;
+}
+
+/* WORK */
+.work-row {
+  display: grid;
+  grid-template-columns: 40px 1fr 2fr;
+  gap: 40px;
+  padding: 22px 0;
+  border-top: 1px solid var(--rule);
+  align-items: baseline;
+  min-height: 6rem;
+}
+
+.work-row:last-child { border-bottom: 1px solid var(--rule); }
+
+.work-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-muted);
+}
+
+.work-title {
+  font-size: 1.08rem;
+  font-weight: 500;
+  letter-spacing: -0.012em;
+}
+
+.work-desc {
+  font-size: 0.94rem;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+/* CONTACT */
+.contact-email {
+  display: inline-block;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+  transition: opacity 0.2s ease;
+  letter-spacing: -0.012em;
+}
+
+.contact-email:hover { opacity: 0.55; }
+
+.contact-social {
+  margin-top: 28px;
+  display: flex;
+  gap: 28px;
+}
+
+.contact-social a {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-fade);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.contact-social a:hover { color: var(--accent); }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 36px 0;
+}
+
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.footer-row p,
+.footer-row span {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+/* FADE-IN */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero > .container > .hero-grid > div:first-child > * {
+  animation: fadeIn 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.hero-meta { animation-delay: 0.05s; }
+.hero h1 { animation-delay: 0.15s; }
+.hero-desc { animation-delay: 0.3s; }
+.chaos-panel { animation: fadeIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .container { padding: 0 22px; }
+  nav { padding: 14px 22px; }
+  .nav-links { gap: 20px; font-size: 0.82rem; }
+  .nav-links .hide-mobile { display: none; }
+  .hero { padding: 40px 0 60px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero h1 { max-width: 100%; }
+  section { padding: 60px 0; }
+  .section-head { grid-template-columns: 1fr; gap: 14px; margin-bottom: 36px; }
+  .section-label { padding-top: 0; }
+  .section-body { margin-left: 0; }
+  .service-row, .work-row { grid-template-columns: 1fr; gap: 6px; padding: 20px 0; }
+  .service-num, .work-num { display: none; }
+  .footer-row { gap: 14px; }
+}
+</style>
+</head>
+<body>
+
+<div class="nav-wrap">
+  <nav>
+    <a href="#" class="wordmark">
+      <svg class="wordmark-mark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.25"/>
+        <path d="M12 2 L12 22" stroke="currentColor" stroke-width="1.25"/>
+        <path class="wordmark-curve" d="M12 2 Q20 12 12 22" stroke-width="1.25" fill="none"/>
+      </svg>
+      <span>Symmetric Labs</span>
+    </a>
+    <div class="nav-links">
+      <a href="#about" class="hide-mobile">About</a>
+      <a href="#work" class="hide-mobile">Work</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</div>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-meta"><span class="mono">§ Symmetric Labs — Strategic Advisory</span></div>
+          <h1>Two decades at the intersection of science, engineering and executive leadership.</h1>
+          <p class="hero-desc">A boutique advisory practice working with founders on protocol design, AI and machine learning strategy, and the convergence of decentralised and traditional finance.</p>
+        </div>
+        <div class="chaos-panel">
+          <canvas id="chaos"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-label"><span class="mono">§ 01 · About</span></div>
+        <h2>Theory translated into production infrastructure.</h2>
+      </div>
+      <div class="section-body about-body">
+        <p>Symmetric Labs is the consulting practice of the former Chief Executive of Euler Labs — the team behind one of the most widely-used lending protocols in decentralised finance.</p>
+        <p>Before Euler, a decade of academic research across dynamical systems, evolutionary theory, bioinformatics and applied machine learning. DPhil from the University of Oxford in mathematical biology; postdoctoral work at Oxford and UCL.</p>
+        <p>The practice is deliberately small. Engagements are led personally.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-label"><span class="mono">§ 02 · Services</span></div>
+        <h2>Scoped engagements, specific questions.</h2>
+      </div>
+      <div class="section-body">
+        <div class="service-row">
+          <span class="service-num">01</span>
+          <div>
+            <h3>Protocol &amp; mechanism design</h3>
+            <p>Lending architecture, tokenomics, market-maker design, interest-rate and auction mechanisms, risk frameworks, governance.</p>
+          </div>
+        </div>
+        <div class="service-row">
+          <span class="service-num">02</span>
+          <div>
+            <h3>AI &amp; machine learning advisory</h3>
+            <p>Technical due diligence, model strategy, research-to-product translation, and AI positioning for founders and investors.</p>
+          </div>
+        </div>
+        <div class="service-row">
+          <span class="service-num">03</span>
+          <div>
+            <h3>Board &amp; fractional leadership</h3>
+            <p>Board and advisor seats, and selective fractional engagements at early-stage companies in decentralised finance and AI.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-label"><span class="mono">§ 03 · Selected work</span></div>
+        <h2>Primitives designed at Euler Labs.</h2>
+      </div>
+      <div class="section-body">
+        <div class="work-row">
+          <span class="work-num">01</span>
+          <span class="work-title">Euler</span>
+          <span class="work-desc">Modular lending protocol with permissionless, isolated-risk vaults.</span>
+        </div>
+        <div class="work-row">
+          <span class="work-num">02</span>
+          <span class="work-title">EulerSwap</span>
+          <span class="work-desc">Credit-based AMM integrated directly with lending positions.</span>
+        </div>
+        <div class="work-row">
+          <span class="work-num">03</span>
+          <span class="work-title">Reactive Rates</span>
+          <span class="work-desc">Control-theoretic model for on-chain lending rates.</span>
+        </div>
+        <div class="work-row">
+          <span class="work-num">04</span>
+          <span class="work-title">Cyclical Rates</span>
+          <span class="work-desc">Fixed-rate lending primitive with programmable, recurring repayment cycles.</span>
+        </div>
+        <div class="work-row">
+          <span class="work-num">05</span>
+          <span class="work-title">Synthetic assets</span>
+          <span class="work-desc">Synthetic asset frameworks collateralised natively by on-chain lending positions.</span>
+        </div>
+        <div class="work-row">
+          <span class="work-num">06</span>
+          <span class="work-title">Fee Flow</span>
+          <span class="work-desc">Auction protocol for protocol fee capture and asset conversion.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-label"><span class="mono">§ 04 · Contact</span></div>
+        <h2>For new engagements and enquiries.</h2>
+      </div>
+      <div class="section-body">
+        <a href="mailto:hello@symmetriclabs.xyz" class="contact-email">hello@symmetriclabs.xyz</a>
+        <div class="contact-social">
+          <a href="https://www.linkedin.com/in/euler-mab/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+          <a href="https://x.com/euler_mab" target="_blank" rel="noopener noreferrer">X <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <p>© 2026 Symmetric Labs Ltd</p>
+      <p>Registered in England &amp; Wales · No. 17151399</p>
+      <p>71–75 Shelton Street, Covent Garden, London WC2H 9JQ</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Chaos simulation — Lorenz attractor
+(function() {
+  const canvas = document.getElementById('chaos');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  let w, h, dpr;
+  function resize() {
+    dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    w = rect.width;
+    h = rect.height;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Lorenz parameters
+  const sigma = 10, rho = 28, beta = 8/3;
+  const dt = 0.005;
+
+  // Three particles with near-identical initial conditions — showcases
+  // sensitive dependence on initial conditions (the butterfly effect).
+  // The lead trajectory renders in the accent teal; the two shadows fade to grey.
+  const particles = [
+    { x: 0.1,    y: 0, z: 0, trail: [], base: '15, 118, 110',  alpha: 0.78, weight: 0.85 },
+    { x: 0.1001, y: 0, z: 0, trail: [], base: '64, 64, 64',    alpha: 0.38, weight: 0.55 },
+    { x: 0.1002, y: 0, z: 0, trail: [], base: '140, 140, 140', alpha: 0.32, weight: 0.5  }
+  ];
+
+  const MAX_TRAIL = 1800;
+
+  function step(p) {
+    const dx = sigma * (p.y - p.x);
+    const dy = p.x * (rho - p.z) - p.y;
+    const dz = p.x * p.y - beta * p.z;
+    p.x += dx * dt;
+    p.y += dy * dt;
+    p.z += dz * dt;
+    p.trail.push([p.x, p.z]);
+    if (p.trail.length > MAX_TRAIL) p.trail.shift();
+  }
+
+  // Chunked rendering — split each trail into N segments with graduated
+  // opacity so older points fade. Much cheaper than per-segment alpha.
+  const CHUNKS = 10;
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+
+    const scale = Math.min(w, h) / 72;
+    const cx = w / 2;
+    const cy = h / 2 + 25 * scale; // z≈25 is roughly the attractor's vertical centre
+
+    particles.forEach(p => {
+      const len = p.trail.length;
+      if (len < 2) return;
+
+      for (let c = 0; c < CHUNKS; c++) {
+        const start = Math.floor(len * c / CHUNKS);
+        const end = Math.min(Math.floor(len * (c + 1) / CHUNKS) + 1, len);
+        if (end - start < 2) continue;
+
+        const age = (c + 1) / CHUNKS; // 0 = oldest, 1 = newest
+        ctx.strokeStyle = 'rgba(' + p.base + ',' + (age * p.alpha).toFixed(3) + ')';
+        ctx.lineWidth = p.weight * (0.35 + age * 0.65);
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        ctx.beginPath();
+        const [x0, z0] = p.trail[start];
+        ctx.moveTo(cx + x0 * scale, cy - z0 * scale);
+        for (let i = start + 1; i < end; i++) {
+          const [x, z] = p.trail[i];
+          ctx.lineTo(cx + x * scale, cy - z * scale);
+        }
+        ctx.stroke();
+      }
+    });
+  }
+
+  function animate() {
+    // Several integration steps per frame so the system evolves at a
+    // contemplative pace rather than inching forward one point at a time.
+    for (let i = 0; i < 6; i++) particles.forEach(step);
+    draw();
+    requestAnimationFrame(animate);
+  }
+
+  // Respect motion preferences — render a static snapshot if animations
+  // are reduced, so the figure is still present but not moving.
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    for (let i = 0; i < 3000; i++) particles.forEach(step);
+    draw();
+  } else {
+    animate();
+  }
+})();
+</script>
+
+</body>
+</html>
