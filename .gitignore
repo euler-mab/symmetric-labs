@@ -1,5 +1,6 @@
 # Sensitive / private files — never commit
 private/
+inbox/
 
 # Secrets
 .env
