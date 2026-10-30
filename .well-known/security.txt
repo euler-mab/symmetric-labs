@@ -1,0 +1,4 @@
+Contact: mailto:security@symmetriclabs.xyz
+Expires: 2027-10-29T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://symmetriclabs.xyz/.well-known/security.txt
